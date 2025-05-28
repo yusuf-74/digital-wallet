@@ -147,7 +147,7 @@ class ATMCode(models.Model):
         super().save(*args, **kwargs)
 
     def is_valid(self):
-        return not self.is_used and timezone.now() > self.expires_at
+        return not self.is_used and timezone.now() < self.expires_at
 
     def mark_as_used(self):
         if not self.is_used:
