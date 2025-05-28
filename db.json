@@ -1,0 +1,335 @@
+[
+{
+    "model": "django_celery_beat.crontabschedule",
+    "pk": 1,
+    "fields": {
+        "minute": "0",
+        "hour": "0",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "day_of_week": "*",
+        "timezone": "UTC"
+    }
+},
+{
+    "model": "django_celery_beat.periodictasks",
+    "pk": 1,
+    "fields": {
+        "last_update": "2025-05-28T15:09:55.033Z"
+    }
+},
+{
+    "model": "django_celery_beat.periodictask",
+    "pk": 1,
+    "fields": {
+        "name": "Daily wallets reset",
+        "task": "wallets.tasks.set_wallets_spends",
+        "interval": null,
+        "crontab": 1,
+        "solar": null,
+        "clocked": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "headers": "{}",
+        "priority": null,
+        "expires": null,
+        "expire_seconds": null,
+        "one_off": false,
+        "start_time": "2025-05-28T15:09:20Z",
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2025-05-28T15:09:21.246Z",
+        "description": ""
+    }
+},
+{
+    "model": "django_celery_beat.periodictask",
+    "pk": 2,
+    "fields": {
+        "name": "Delete expired codes",
+        "task": "authentication.tasks.delete_expired_otp_codes",
+        "interval": null,
+        "crontab": 1,
+        "solar": null,
+        "clocked": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "headers": "{}",
+        "priority": null,
+        "expires": null,
+        "expire_seconds": null,
+        "one_off": false,
+        "start_time": null,
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2025-05-28T15:09:55.032Z",
+        "description": ""
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 1,
+    "fields": {
+        "last_login": "2025-05-28T15:06:55.648Z",
+        "first_name": "admin",
+        "last_name": "user",
+        "phone_number": "123456789",
+        "password": "pbkdf2_sha256$1000000$bwrw2oUHqZYiOMwUBbHl5G$tu2SMg/rQm9PfYzx3cs/Fm6isJSRe45EGwxWOeQBjGk=",
+        "date_of_birth": "1990-01-01",
+        "tier": 1,
+        "is_staff": true,
+        "is_active": true,
+        "is_superuser": true,
+        "is_verified": true,
+        "date_joined": "2025-05-28T14:52:18.496Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 2,
+    "fields": {
+        "last_login": null,
+        "first_name": "Yusuf",
+        "last_name": "Ashour 1",
+        "phone_number": "+201157942371",
+        "password": "pbkdf2_sha256$1000000$2tQHu5mqMd06iIe1ADwtl7$ldT3K/x6pCobl/rU8hveQYi3zi36gFDV7+ANtZgfH9g=",
+        "date_of_birth": "2000-03-24",
+        "tier": 1,
+        "is_staff": false,
+        "is_active": true,
+        "is_superuser": false,
+        "is_verified": true,
+        "date_joined": "2025-05-28T14:52:39.537Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authentication.user",
+    "pk": 3,
+    "fields": {
+        "last_login": null,
+        "first_name": "Yusuf",
+        "last_name": "Ashour 2",
+        "phone_number": "++201032938732",
+        "password": "pbkdf2_sha256$1000000$6omz54hhXoTtmrqRbZb0Bx$WjBEdUXiFV47/8He4LPgPeAIp2XX1zQ/7V1TCeO/Hc0=",
+        "date_of_birth": "2000-03-24",
+        "tier": 1,
+        "is_staff": false,
+        "is_active": true,
+        "is_superuser": false,
+        "is_verified": true,
+        "date_joined": "2025-05-28T14:54:07.295Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "utilities.currency",
+    "pk": 1,
+    "fields": {
+        "currency_code": "USD",
+        "currency_name": "United States Dollar",
+        "symbol": "$",
+        "last_updated_by": 1,
+        "is_active": true,
+        "created_at": "2025-05-28T14:56:55.640Z",
+        "updated_at": "2025-05-28T14:56:55.640Z"
+    }
+},
+{
+    "model": "utilities.currency",
+    "pk": 2,
+    "fields": {
+        "currency_code": "EUR",
+        "currency_name": "Euro",
+        "symbol": "&",
+        "last_updated_by": 1,
+        "is_active": true,
+        "created_at": "2025-05-28T14:57:15.566Z",
+        "updated_at": "2025-05-28T14:57:15.566Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "name": "USD Wallet",
+        "balance": "100.00",
+        "currency": 1,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:57:57.851Z",
+        "created_at": "2025-05-28T14:57:57.851Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "name": "USD Wallet 2",
+        "balance": "100.00",
+        "currency": 1,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:57:59.740Z",
+        "created_at": "2025-05-28T14:57:59.740Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "name": "USD Wallet 3",
+        "balance": "100.00",
+        "currency": 1,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:02.421Z",
+        "created_at": "2025-05-28T14:58:02.421Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "name": "EUR Wallet",
+        "balance": "100.00",
+        "currency": 2,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:06.665Z",
+        "created_at": "2025-05-28T14:58:06.665Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 5,
+    "fields": {
+        "user": 2,
+        "name": "EUR Wallet 2",
+        "balance": "100.00",
+        "currency": 2,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:07.573Z",
+        "created_at": "2025-05-28T14:58:07.573Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 6,
+    "fields": {
+        "user": 3,
+        "name": "USD Wallet",
+        "balance": "100.00",
+        "currency": 1,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:49.824Z",
+        "created_at": "2025-05-28T14:58:49.824Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 7,
+    "fields": {
+        "user": 3,
+        "name": "USD Wallet 2",
+        "balance": "100.00",
+        "currency": 1,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:51.789Z",
+        "created_at": "2025-05-28T14:58:51.789Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 8,
+    "fields": {
+        "user": 3,
+        "name": "EUR Wallet",
+        "balance": "100.00",
+        "currency": 2,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:57.157Z",
+        "created_at": "2025-05-28T14:58:57.157Z"
+    }
+},
+{
+    "model": "wallets.wallet",
+    "pk": 9,
+    "fields": {
+        "user": 3,
+        "name": "EUR Wallet 2",
+        "balance": "100.00",
+        "currency": 2,
+        "transferred_today": "0.00",
+        "withdrawn_today": "0.00",
+        "is_active": true,
+        "updated_at": "2025-05-28T14:58:57.944Z",
+        "created_at": "2025-05-28T14:58:57.944Z"
+    }
+},
+{
+    "model": "wallets.tier",
+    "pk": 1,
+    "fields": {
+        "name": "basic",
+        "description": null,
+        "number_of_wallets": 5,
+        "created_at": "2025-05-28T14:52:18.537Z",
+        "updated_at": "2025-05-28T14:52:18.537Z"
+    }
+},
+{
+    "model": "wallets.tiercurrencylimit",
+    "pk": 1,
+    "fields": {
+        "tier": 1,
+        "currency": 1,
+        "daily_withdrawal_limit": "1000.00",
+        "daily_transfer_limit": "5000.00",
+        "daily_transactions_limit": 100,
+        "created_at": "2025-05-28T15:10:30.487Z",
+        "updated_at": "2025-05-28T15:10:30.487Z"
+    }
+},
+{
+    "model": "wallets.tiercurrencylimit",
+    "pk": 2,
+    "fields": {
+        "tier": 1,
+        "currency": 2,
+        "daily_withdrawal_limit": "1000.00",
+        "daily_transfer_limit": "3000.00",
+        "daily_transactions_limit": 100,
+        "created_at": "2025-05-28T15:10:47.620Z",
+        "updated_at": "2025-05-28T15:10:47.620Z"
+    }
+}
+]
