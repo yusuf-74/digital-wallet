@@ -62,6 +62,10 @@ class CurrencyListCreateView(UnifiedResponseListCreateAPIView):
         return query_optimizer(Currency, self.request)
 
 
+@extend_schema(
+    tags=['Wallets'],
+    responses={200: CurrencySerializer, 204: None},
+)
 class CurrencyRetrieveUpdateDestroyView(UnifiedResponseRetrieveUpdateDestroyAPIView):
     permission_classes = [IsAdminUser]
     serializer_class = CurrencySerializer

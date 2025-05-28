@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -23,8 +23,8 @@ from .serializers import (
 from .utils import NotificationOperator, TransactionOperator, verify_webhook_signature
 
 
+@extend_schema(tags=['Wallets'])
 class WalletListCreateView(UnifiedResponseListCreateAPIView):
-    permission_classes = [IsAuthenticated]
     filterset_class = WalletFilter
     search_fields = ['name', 'user__phone_number']
     ordering_fields = ['created_at', 'balance']
@@ -74,8 +74,8 @@ class WalletListCreateView(UnifiedResponseListCreateAPIView):
         )
 
 
+@extend_schema(tags=['Wallets'])
 class WalletRetrieveUpdateDestroyView(UnifiedResponseRetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
     serializer_class = WalletSerializer
 
     def get_queryset(self):
@@ -99,8 +99,8 @@ class WalletRetrieveUpdateDestroyView(UnifiedResponseRetrieveUpdateDestroyAPIVie
             )
 
 
+@extend_schema(tags=['Wallets'])
 class TransactionListView(UnifiedResponseListAPIView):
-    permission_classes = [IsAuthenticated]
     filterset_class = TransactionFilter
     serializer_class = TransactionSerializer
     search_fields = ['reference', 'wallet__user__phone_number', 'related_wallet__user__phone_number']
@@ -112,9 +112,8 @@ class TransactionListView(UnifiedResponseListAPIView):
         return query_optimizer(Transaction, self.request).filter(wallet__user=self.request.user)
 
 
+@extend_schema(tags=['Wallets-Actions'])
 class RequestATMCodeView(APIView):
-    permission_classes = [IsAuthenticated]
-
     def post(self, request, *args, **kwargs):
         user = request.user
         atm_code = ATMCode.objects.create(user=user)
@@ -130,8 +129,9 @@ class RequestATMCodeView(APIView):
         )
 
 
+@extend_schema(tags=['Wallets-Actions'])
 class TransferMoneyView(APIView):
-    permission_classes = [IsAuthenticated]
+    serializer_class = WalletTransferSerializer
 
     def post(self, request, *args, **kwargs):
         source_wallet = request.data.get('source_wallet')
@@ -185,9 +185,8 @@ class TransferMoneyView(APIView):
         )
 
 
+@extend_schema(tags=['Wallets-Actions'])
 class TransferActionView(APIView):
-    permission_classes = [IsAuthenticated]
-
     def post(self, request, *args, **kwargs):
         reference = request.data.get('reference')
         action = request.data.get('action')
@@ -214,9 +213,8 @@ class TransferActionView(APIView):
             return Response({'success': False, 'message': str(e), 'data': None}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=['Wallets-Actions'])
 class CancelTransferView(APIView):
-    permission_classes = [IsAuthenticated]
-
     def post(self, request, *args, **kwargs):
         reference = request.data.get('reference')
 
@@ -236,6 +234,7 @@ class CancelTransferView(APIView):
             return Response({'success': False, 'message': str(e), 'data': None}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=['Webhooks'])
 class BankWebhook(APIView):
     authentication_classes = []
     permission_classes = []
