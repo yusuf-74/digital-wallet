@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "purpl-digital-wallet"
+version = "0.1.0"
+description = ""
+authors = ["Yusuf Ashour <yachour31@gmail.com>"]
+readme = "README.md"
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+skip-string-normalization = true
+exclude = "migrations"
+
+[tool.isort]
+profile = "black"
+skip = "__init__.py"
+multi_line_output = 3
