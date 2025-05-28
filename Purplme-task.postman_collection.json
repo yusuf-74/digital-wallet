@@ -1,0 +1,778 @@
+{
+	"info": {
+		"_postman_id": "e393c19c-097a-4338-96c6-04105da72d66",
+		"name": "Purplme-task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31343715"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "CRUDs",
+					"item": [
+						{
+							"name": "list-users",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refresh\":\"{{refresh_token}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/users/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "retreive-user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refresh\":\"{{refresh_token}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/users/1/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-user",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "update-user",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deactivate-user",
+							"request": {
+								"method": "DELETE",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "me",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refresh\":\"{{refresh_token}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/users/me/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"me",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "sign-up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\":\"+201157942371\",\n    \"password\": \"123456\",\n    \"repeat_password\": \"123456\",\n    \"first_name\": \"Yusuf\",\n    \"last_name\": \"Ashour\",\n    \"date_of_birth\": \"2000-03-24\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/signup/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"signup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set access & refresh tokens vars\", function () {",
+									"  const responseBody = pm.response.json();",
+									"  pm.environment.set('access_token', responseBody.access_token);",
+									"  pm.environment.set('refresh_token', responseBody.refresh_token);",
+									"  return true;",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\": \"+201032938732\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/login/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-phone-number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set access & refresh tokens vars\", function () {",
+									"  const responseBody = pm.response.json();",
+									"  pm.environment.set('access_token', responseBody.access_token);",
+									"  pm.environment.set('refresh_token', responseBody.refresh_token);",
+									"  return true;",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\": \"+201157942371\",\n    \"code\": 200992\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/verify-phone/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"verify-phone",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-pasword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"463569\",\n    \"password\": \"654321\",\n    \"repeat_password\": \"654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/reset-password/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\": \"+201032938732\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/forgot-password/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"forgot-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set access token env var\", function () {",
+									"  const responseBody = pm.response.json();",
+									"  pm.environment.set('access_token', responseBody.access);",
+									"  return true;",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\":\"{{refresh_token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/token/refresh/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "request-otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/request-otp/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"request-otp",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utils",
+			"item": [
+				{
+					"name": "list-currencies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/utils/currencies/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utils",
+								"currencies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-currency",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_name\": \"Euro\",\n    \"currency_code\": \"EUR\",\n    \"symbol\": \"&\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/utils/currencies/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utils",
+								"currencies",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wallets",
+			"item": [
+				{
+					"name": "CRUDs",
+					"item": [
+						{
+							"name": "list-wallets",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/wallets/?expand=currency,user,user.tier,transactions",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										""
+									],
+									"query": [
+										{
+											"key": "expand",
+											"value": "currency,user,user.tier,transactions"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-wallet",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list-transactions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/wallets/transactions/?status=PENDING&expand=wallet,related_wallet,user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"transactions",
+										""
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "PENDING"
+										},
+										{
+											"key": "expand",
+											"value": "wallet,related_wallet,user"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actions",
+					"item": [
+						{
+							"name": "transfer-money",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source_wallet\": 5,\n    \"target_wallet\": 1,\n    \"amount\": 100,\n    \"description\": \"Live expenses\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/transfer-money/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"transfer-money",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancel-transfer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reference\": \"WTRF-20250527130608-0CF44C67\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/cancel-transfer/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"cancel-transfer",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transfer-action",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reference\": \"WTRF-20250527133033-796DB344\",\n    \"action\": \"accept\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/transfer-action/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"transfer-action",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "request-atm-otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/wallets/request-atm-code/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"request-atm-code",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Webhook",
+					"item": [
+						{
+							"name": "withdraw-event",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Webhook-Token",
+										"value": "supersecrettoken",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"withdrawal\",\n    \"wallet_id\": 5,\n    \"amount\": \"400.50\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/bank-webhook/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"bank-webhook",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deposit-event",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Webhook-Token",
+										"value": "supersecrettoken",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"deposite\",\n    \"wallet_id\": 5,\n    \"amount\": \"400.50\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/bank-webhook/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"bank-webhook",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login-event",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Webhook-Token",
+										"value": "supersecrettoken",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone_number\": \"+201032938739\",\n    \"pass_code\": \"400050\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/wallets/bank-webhook/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"wallets",
+										"bank-webhook",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
