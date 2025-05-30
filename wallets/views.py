@@ -198,7 +198,7 @@ class TransferActionView(APIView):
             )
 
         try:
-            TransactionOperator.finalize_transfer(reference, action)
+            TransactionOperator.finalize_transfer(reference, action, request.user)
             return Response(
                 {
                     'success': True,
@@ -225,7 +225,7 @@ class CancelTransferView(APIView):
             )
 
         try:
-            TransactionOperator.cancel_transfer(reference)
+            TransactionOperator.cancel_transfer(reference, request.user)
             return Response(
                 {'success': True, 'message': _("Transfer has been successfully canceled."), 'data': None},
                 status=status.HTTP_200_OK,

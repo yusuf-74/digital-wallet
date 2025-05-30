@@ -3,6 +3,7 @@ from decimal import Decimal
 from decouple import config
 from django.db.transaction import atomic
 
+from authentication.models import User
 from utils.common_tasks import send_sms_task
 from utils.data_generators import generate_reference
 
@@ -52,12 +53,13 @@ class TransactionOperator:
             return reference
 
     @staticmethod
-    def finalize_transfer(reference: str, action: str) -> None:
+    def finalize_transfer(reference: str, action: str, actor: User) -> None:
         with atomic():
             transaction = Transaction.objects.filter(
                 reference=reference,
                 status=Transaction.Status.PENDING,
                 transaction_type=Transaction.TransactionType.TRANSFER_OUT,
+                related_wallet__user=actor,
             ).first()
             if not transaction:
                 raise ValueError("No pending transaction found with the provided reference.")
@@ -123,12 +125,13 @@ class TransactionOperator:
             ).update(status=(Transaction.Status.COMPLETED if action == 'ACCEPT' else Transaction.Status.DECLINED))
 
     @staticmethod
-    def cancel_transfer(reference: str) -> None:
+    def cancel_transfer(reference: str, actor: User) -> None:
         with atomic():
             transaction = Transaction.objects.filter(
                 reference=reference,
                 status=Transaction.Status.PENDING,
                 transaction_type=Transaction.TransactionType.TRANSFER_OUT,
+                wallet__user=actor,
             ).first()
             if not transaction:
                 raise ValueError("No pending transactions found with the provided reference.")
