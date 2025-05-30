@@ -19,9 +19,13 @@ class WalletSerializer(BaseModelSerializer):
         representation = super().to_representation(instance)
         expand = self.context.get('request').query_params.get('expand', '')
         if 'currency' in expand:
-            representation['currency'] = CurrencySerializer(instance.currency).data
+            representation['currency'] = CurrencySerializer(
+                instance.currency, context={'request': self.context.get('request')}
+            ).data
         if 'transactions' in expand:
-            representation['transactions'] = TransactionSerializer(instance.transactions.all(), many=True).data
+            representation['transactions'] = TransactionSerializer(
+                instance.transactions.all(), many=True, context={'request': self.context.get('request')}
+            ).data
         if 'user' in expand:
             representation['user'] = {
                 'id': instance.user.id,
